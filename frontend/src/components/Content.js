@@ -12,16 +12,21 @@ import Instructions from './Instructions';
 */
 class Content extends Component {
   renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
+    if (this.props.edit) {
+      return <NoteEditor note={this.props.note} title={this.props.title} body={this.props.body} onTextChange={this.props.onTextChange} updateNote={this.props.updateNote} onCancel={this.props.onCancel}/>;
+
+    } else if (this.props.body) {
+      return <NoteViewer onEdit={this.props.onEdit} title={this.props.title} body={this.props.body}/>;
+
+    } else if (this.props.new) {
+      return <NoteEditor title={this.props.title} body={this.props.body} onTextChange={this.props.onTextChange} submitNote={this.props.submitNote} onCancel={this.props.onCancel}/>
+
     } else {
       return <Instructions />;
     }
   }
-
   render() {
+
     return (
       <div className='master-detail-element detail'>
         {this.renderContent()}
